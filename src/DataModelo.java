@@ -81,19 +81,15 @@ import java.util.Scanner;
             }
         }
 
-        public static List<Cliente> recuperarClientes() {
-            List<Cliente> result = new ArrayList<>();
+        public static List<Provider> recuperarClientes() {
+            List<Provider> result = new ArrayList<>();
             try {
                 Connection conn = Conexion.getInstancia().conectar();
-                ResultSet rs = conn.prepareStatement("Select * from Clientes;").executeQuery();
+                ResultSet rs = conn.prepareStatement("Select * from provider;").executeQuery();
                 while (rs.next()) {
-                    Cliente cliente = new Cliente();
-                    cliente.setNombre(rs.getString(2));
-                    cliente.setApellido(rs.getString(3));
-                    cliente.setEdad(rs.getInt(4));
-                    cliente.setDni(rs.getInt(5));
-                    cliente.setPlan(rs.getInt(6));
-                    result.add(cliente);
+                    Provider provider = new Provider();
+                    provider.setName(rs.getString(2));
+                    result.add(provider);
                 }
             } catch (SQLException ex) {
                 System.out.println("Error");
@@ -101,20 +97,20 @@ import java.util.Scanner;
             return result;
         }
 
-        public static void buscarCliente(int dni, String couta) {
+        public static void buscarCliente(int celular1, int celular) {
             try {
                 Connection conn = Conexion.getInstancia().conectar();
-                String queryBuscar = "SELECT * From Clientes where DNI =" + dni;
+                String queryBuscar = "SELECT * From provider where DNI =" + celular1;
                 Statement consulta = conn.createStatement();
                 ResultSet registro = consulta.executeQuery(queryBuscar);
                 if (registro.next()) {
-                    System.out.println(registro.getInt(1) + " #Nombre:" + registro.getString(2) + " #Apellido:" + registro.getString(3) + " #Edad:" + registro.getInt(4) + " #DNI:" + registro.getInt(5) + " #Couta:" + registro.getInt(6));
+                    System.out.println(registro.getInt(1) + " #Nombre:" + registro.getString(2));
                     System.out.println(" ");
-                    String queryUp = "UPDATE `gym`.`Clientes` SET Couta = '" + couta + "' WHERE (`DNI` =" + dni + ")";
+                    String queryUp = "UPDATE `farmacia`.`provider` SET Celular = '" + celular + "' WHERE (`celular` =" + celular1 + ")";
                     int countUpdate = conn.prepareStatement(queryUp).executeUpdate();
                     System.out.println("Cambios realizados:" + countUpdate);
                 } else {
-                    System.out.println("DNI de cliente no encontrado");
+                    System.out.println("Celular de Proveedor no fué encontrado");
                 }
 
             } catch (SQLException e) {

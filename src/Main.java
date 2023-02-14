@@ -8,7 +8,7 @@ public class Main {
         public static void main(String[] args) {
             DataModelo model = new DataModelo();
             boolean bandera = true;
-            do {
+            /*do {
                 try {
                     int opc = View.menu();
                     try {
@@ -36,9 +36,9 @@ public class Main {
                                     }
                                     break;
                                 case 4:
-                                    int dni = Vista.saveDni();
-                                    String couta = Vista.newCouta();
-                                    model.buscarCliente(dni, couta);
+                                    int celular1 = Vista.saveDni();
+                                    String celular = Vista.newCouta();
+                                    model.buscarCliente(celular1, celular);
                                     break;
                                 case 5:
                                     bandera = false;
@@ -58,11 +58,11 @@ public class Main {
                     e.printStackTrace();
                     System.out.println(e + " La connexion a la Base de Datos fallo");
                 }
-            } while (bandera != false);
+            } while (bandera != false);*/
 
         }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         DataModelo modelo = new DataModelo();
         boolean flat = true;
         int leer;
@@ -112,5 +112,5 @@ public class Main {
 
 
         } while (flat);
-    }
+    }*/
 }
