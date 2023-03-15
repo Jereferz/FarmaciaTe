@@ -4,13 +4,26 @@ public class Medicine {
     private String name;
     private int amount;
     private double unitPrice;
+
+    public Medicine() {
+    }
+
+    public int getState() {
+        return state;
+    }
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    private int state;
     //Contructor de medicinas
-    public Medicine(int code, String name, int amount, double unitPrice) {
+    public Medicine(int code, String name, int amount, double unitPrice, int state) {
         super();
         this.code = code;
         this.name = name;
         this.amount = amount;
         this.unitPrice = unitPrice;
+        this.state = state;
     }
     //Getters y Setters de cada atributo
     public int getCode() {

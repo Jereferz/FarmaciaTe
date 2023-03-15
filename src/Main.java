@@ -1,40 +1,51 @@
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
+import java.util.List;
 
 
 public class Main {
 
         public static void main(String[] args) {
-            DataModelo model = new DataModelo();
+            //DataModelo model = new DataModelo();
             boolean bandera = true;
-            /*do {
+            do {
                 try {
+                    //Connection conn = Conexion.getInstancia().conectar();
                     int opc = View.menu();
                     try {
+                        Medicine med = null;
+                        Provider pro = null;
                         if (0 != opc) {
                             switch (opc) {
                                 case 1:
-                                    Connection conn = Conexion.getInstancia().conectar();
-                                    Medicine med = View.agregarCliente();
-                                    int filas = model.recupararCode(conn);
-                                    model.saveClient(med, filas);
-                                    break;
-                                case 2:
-                                    var list = model.recuperarClientes();
-                                    Vista.verC(list);
-                                    break;
-                                case 3:
-                                    var list2 = model.recuperarClientes();
-                                    Vista.verC(list2);
-                                    String rem = Vista.eliminarCliente();
-                                    if (rem.equals("s")) {
-                                        System.out.println("Cancelado...");
+                                    try {
+                                        med = View.addingMedicine();
+                                        DataModelo.saveMedicine(med);
                                         break;
-                                    } else {
-                                        model.eliminarCliente(rem);
+                                    }catch (Exception a){
+                                        DataModelo.saveMedicineTxt(med);
+                                        break;
                                     }
-                                    break;
+                                case 2:
+                                    try {
+                                        pro = View.registerProvider();
+                                        DataModelo.(pro);
+                                        break;
+                                    }catch (Exception a){
+                                        DataModelo.saveMedicineTxt(med);
+                                        break;
+                                    }
+                                case 3:
+                                    try {
+                                        List<Medicine> list = DataModelo.recoverMedicine();
+                                        View.listMedicine(list);
+                                        break;
+                                    } catch (Exception a) {
+                                        List<Medicine> list1 = DataModelo.recoverMedicineTxt();
+                                        View.listMedicine(list1);
+                                        break;
+                                    }
                                 case 4:
                                     int celular1 = Vista.saveDni();
                                     String celular = Vista.newCouta();
@@ -58,7 +69,7 @@ public class Main {
                     e.printStackTrace();
                     System.out.println(e + " La connexion a la Base de Datos fallo");
                 }
-            } while (bandera != false);*/
+            } while (bandera != false);
 
         }
 

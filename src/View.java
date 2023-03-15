@@ -2,6 +2,7 @@ import java.io.PrintStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
@@ -14,10 +15,13 @@ public class View {
         //Excepcion para que no inserte simbolos ni letras
         try {
             int leer = 0;
+            System.out.println("Farmacaco S.A");
             System.out.println("1. Agregar Proveedor");
             System.out.println("2. Agregar Medicamento");
             System.out.println("3. Mostrar inventario");
-            System.out.println("4. Salir");
+            System.out.println("4. Mostrar Proveedores");
+            System.out.println("5. Cambiar Precio de Medicamento");
+            System.out.println("6. Salir");
             leer = leer1.nextInt();
             return leer;
         }catch (InputMismatchException o) {
@@ -51,14 +55,20 @@ public class View {
         amount= read.nextInt();
         System.out.println("Precio x unidad: ");
         unit_price = read.nextDouble();
-        System.out.println("Elija proveedor: ");
-        Medicine medicine = new Medicine(code,name,amount,unit_price);
+        System.out.println("Cantidad: ");
+        amount= read.nextInt();
+        Medicine medicine = new Medicine(code,name,amount,unit_price,state);
 
         return medicine;
     }
-    public static void listMedicine(Medicine PM) {
+    /*public static void listMedicine(Medicine PM) {
         System.out.println("Lista de las medicinas");
         System.out.println(PM);
+    }*/
+    public static void listMedicine(List<Medicine> al) {
+        for (int i = 0; i < al.size(); i++) {
+            System.out.println(i + "-" + al.get(i));
+        }
     }
 
     public void listProvider(ResultSet prove) throws SQLException {

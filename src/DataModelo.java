@@ -1,4 +1,8 @@
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,22 +70,45 @@ import java.util.Scanner;
 
         }
 
-        public void saveMedicine(Medicine c, int f) {
+        public static boolean saveMedicine(Medicine m) {
+            boolean exit;
             try {
                 Connection con = Conexion.getInstancia().conectar();
-                PreparedStatement QueryInsert = con.prepareStatement("Insert into Clientes value (?,?,?,?,?,?)");
-                QueryInsert.setInt(1, f);
-                QueryInsert.setInt(2, c.getCode());
-                QueryInsert.setString(3, c.getName());
-                QueryInsert.setInt(4, c.getAmount());
-                QueryInsert.setDouble(5, c.getUnitPrice());
+                PreparedStatement QueryInsert = con.prepareStatement("Insert into medicines value (?,?,?,?,?)");
+                QueryInsert.setString(1, null);
+                QueryInsert.setInt(2, m.getCode());
+                QueryInsert.setString(3, m.getName());
+                QueryInsert.setInt(4, m.getAmount());
+                QueryInsert.setDouble(5, m.getUnitPrice());
                 int medicineInsert = QueryInsert.executeUpdate();
+                exit = true;
             } catch (SQLException ex) {
                 System.out.println("Error");
+                exit = false;
             }
+            return exit;
         }
 
-        public static List<Provider> recuperarClientes() {
+        public static List<Medicine> recoverMedicine() {
+            List<Medicine> result = new ArrayList<>();
+            try {
+                Connection conn = Conexion.getInstancia().conectar();
+                ResultSet rs = conn.prepareStatement("Select * from medicine where Estado = 1;").executeQuery();
+                while (rs.next()) {
+                    Medicine medicina = new Medicine();
+                    medicina.setCode(rs.getInt(2));
+                    medicina.setName(rs.getString(3));
+                    medicina.setAmount(rs.getInt(4));
+                    medicina.setUnitPrice(rs.getInt(5));
+                    Medicine.setState(rs.getInt(6));
+                    result.add(medicina);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error :C");
+            }
+            return result;
+        }
+        public static List<Provider> recoverProvider() {
             List<Provider> result = new ArrayList<>();
             try {
                 Connection conn = Conexion.getInstancia().conectar();
@@ -91,8 +118,8 @@ import java.util.Scanner;
                     provider.setName(rs.getString(2));
                     result.add(provider);
                 }
-            } catch (SQLException ex) {
-                System.out.println("Error");
+            } catch (SQLException e) {
+                System.out.println("Error :C");
             }
             return result;
         }
@@ -117,6 +144,98 @@ import java.util.Scanner;
                 throw new RuntimeException(e);
             }
         }
+        //--------------------TXT--------------------//
+        public static void saveProviderTxt(Provider p) {
+            ArrayList<Provider> providers = new ArrayList<>();
+            providers.addAll(DataModelo.recoverProviderTxt());
+            providers.add(p);
+            try {
+                ObjectOutputStream copyDates = new ObjectOutputStream(new FileOutputStream("C:/dates/Provider.txt"));
+                copyDates.writeObject(providers);
+                copyDates.close();
+            } catch (Exception e) {
 
+            }
+        }
 
+        public static ArrayList recoverProviderTxt() {
+            ArrayList<Provider> recoverP = new ArrayList<>();
+            try {
+                ObjectInputStream getDates = new ObjectInputStream(new FileInputStream("C:/dates/Provider.txt"));
+                recoverP = (ArrayList<Provider>) getDates.readObject();
+            } catch (Exception e) {
+
+            }
+            return recoverP;
+        }
+
+        public static void saveMedicineTxt(Medicine m) {
+            ArrayList<Medicine> medicines = new ArrayList<>();
+            medicines.addAll(DataModelo.recoverMedicineTxt());
+            medicines.add(m);
+
+            try {
+                ObjectOutputStream copyDates = new ObjectOutputStream(new FileOutputStream("C:/dates/Medicine.txt"));
+                copyDates.writeObject(medicines);
+                copyDates.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+        public static List<Medicine> recoverMedicineTxt() {
+            List<Medicine> recoverM = new ArrayList<>();
+            try {
+                ObjectInputStream getDates = new ObjectInputStream(new FileInputStream("C:/dates/Medicine.txt"));
+                recoverM = (ArrayList<Medicine>) getDates.readObject();
+
+            } catch (Exception e) {
+
+            }
+            return recoverM;
+        }
+        public static void sobreescribirMed(List <Medicine> sobreescrito){
+            ArrayList<Medicine> MedicinesTxt = (ArrayList<Medicine>) sobreescrito;
+            try {
+                ObjectOutputStream setDates= new ObjectOutputStream(new FileOutputStream("C:/MisFicheros/Medicine.txt"));
+                setDates.writeObject(MedicinesTxt);
+                setDates.close();
+            }catch (Exception e){
+                System.out.println("Fallo la conexion del txt guardar");
+            }
+        }
+        public static List<Medicine> searchMedicineTxt(int code, String price) {
+            List<Medicine> med = recoverMedicineTxt();
+            try {
+                for (int i = 0; i < med.size(); i++) {
+                    if (med.get(i).getCode() == code) {
+                        med.get(i).setUnitPrice(Integer.parseInt(price));
+                        System.out.println("Encontrado");
+                        System.out.println(med.get(i));
+                        sobreescribirMed(med);
+                        break;
+                    }else {
+                        System.out.println("no econtrado");
+                    }
+                }
+                return med;
+            } catch (Exception e) {
+                return med;
+            }
+
+        }
+        public static  void deleteMedicineTxt (String code){
+            List<Medicine> medicines = recoverMedicineTxt();
+            for (int i = 0; i <medicines.size(); i++) {
+                if (Integer.parseInt(code) == medicines.get(i).getCode()) {
+                    medicines.remove(i);
+                    System.out.println("Eliminado correctamente");
+                    sobreescribirMed(medicines);
+                    break;
+                }else {
+                    System.out.println("El usuario no fue encontrado");
+                }
+            }
+
+        }
     }
