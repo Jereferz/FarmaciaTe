@@ -1,5 +1,9 @@
 public class Provider {
     private String name;
+
+
+
+    private int phoneNumber;
     //private ArrayList<Medicine> newmedicine;
     /*public Provider() {
         newmedicine = new ArrayList<Medicine>();
@@ -8,6 +12,7 @@ public class Provider {
     public Provider() {
         super();
         this.name = name;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
@@ -16,6 +21,9 @@ public class Provider {
     public void setName(String name) {
         this.name = name;
     }
+    public int getPhoneNumber() {return phoneNumber;}
+
+    public void setPhoneNumber(int phoneNumber) {this.phoneNumber = phoneNumber;}
     //
     /*public void addMedicine(Medicine m) {
         newmedicine.add(m);

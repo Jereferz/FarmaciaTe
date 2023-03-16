@@ -15,7 +15,7 @@ public class Main {
                     int opc = View.menu();
                     try {
                         Medicine med = null;
-                        Provider pro = null;
+                        //Provider pro = null;
                         if (0 != opc) {
                             switch (opc) {
                                 case 1:
@@ -29,7 +29,7 @@ public class Main {
                                     }
                                 case 2:
                                     try {
-                                        pro = View.registerProvider();
+                                        Provider pro = View.registerProvider();
                                         DataModelo.(pro);
                                         break;
                                     }catch (Exception a){

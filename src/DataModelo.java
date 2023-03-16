@@ -65,11 +65,26 @@ import java.util.Scanner;
                 System.out.println("Medicina Eliminada");
 
             } catch (SQLException e) {
-                System.out.println("Fallo eliminar de la base de datos");
+                System.out.println("Fallo al eliminar de la base de datos");
             }
 
         }
-
+        public static boolean saveProvider(Provider p) {
+            boolean exit;
+            try {
+                Connection con = Conexion.getInstancia().conectar();
+                PreparedStatement QueryInsert = con.prepareStatement("Insert into medicines value (?,?,?,?,?)");
+                QueryInsert.setString(1, null);
+                QueryInsert.setString(2, p.getName());
+                QueryInsert.setInt(3, p.getPhoneNumber());
+                int medicineInsert = QueryInsert.executeUpdate();
+                exit = true;
+            } catch (SQLException ex) {
+                System.out.println("Error");
+                exit = false;
+            }
+            return exit;
+        }
         public static boolean saveMedicine(Medicine m) {
             boolean exit;
             try {
