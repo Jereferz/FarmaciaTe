@@ -6,7 +6,7 @@ public class Conexion {
     private static Connection conn;
     private static Conexion instancia;
 
-    private static final String url = "jdbc:mysql://localhost:8081/farmacia";
+    private static final String url = "jdbc:mysql://localhost:80/farmacia";
     private static final String user = "root";
     private static final String pass = "";
 
