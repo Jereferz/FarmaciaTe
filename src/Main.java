@@ -15,12 +15,13 @@ public class Main {
                     int opc = View.menu();
                     try {
                         Medicine med = null;
-                        //Provider pro = null;
+                        Provider pro = null;
                         if (0 != opc) {
                             switch (opc) {
                                 case 1:
+                                    med = View.addingMedicine();
                                     try {
-                                        med = View.addingMedicine();
+
                                         DataModelo.saveMedicine(med);
                                         break;
                                     }catch (Exception a){
@@ -28,12 +29,12 @@ public class Main {
                                         break;
                                     }
                                 case 2:
+                                    pro = View.registerProvider();
                                     try {
-                                        Provider pro = View.registerProvider();
-                                        DataModelo.(pro);
+                                        DataModelo.saveProvider(pro);
                                         break;
                                     }catch (Exception a){
-                                        DataModelo.saveMedicineTxt(med);
+                                        DataModelo.saveProviderTxt(pro);
                                         break;
                                     }
                                 case 3:

@@ -9,7 +9,7 @@ public class View {
     //Menu inicial que ve el usuario
     static Scanner read;
     static Scanner num1 ;
-
+    static Medicine m = new Medicine();
     public static int menu() {
         Scanner leer1 = new Scanner(System.in);
         //Excepcion para que no inserte simbolos ni letras
@@ -37,29 +37,28 @@ public class View {
         Provider p = new Provider();
         System.out.println("Ingrese el nombre del Proveedor");
         p.setName(leer2.next());
-        System.out.println(p);
+        System.out.println("Ingrese el celular del Proveedor");
+        p.setPhoneNumber(leer2.nextInt());
         return p;
     }
     public static Medicine addingMedicine() {
         int code;
+        int state = 0;
         String name;
         int amount;
         double unit_price;
         Scanner read = new Scanner(System.in);
         System.out.println("Agregue nueva medicina");
         System.out.println("Codigo: ");
-        code = read.nextInt();
+        m.setCode(read.nextInt());
         System.out.println("Nombre: ");
-        name = read.next();
+        m.setName(read.next());
         System.out.println("Cantidad: ");
-        amount= read.nextInt();
+        m.setAmount(read.nextInt());
         System.out.println("Precio x unidad: ");
-        unit_price = read.nextDouble();
-        System.out.println("Cantidad: ");
-        amount= read.nextInt();
-        Medicine medicine = new Medicine(code,name,amount,unit_price,state);
-
-        return medicine;
+        m.setUnitPrice(read.nextDouble());
+        m.setState(1);
+        return m;
     }
     /*public static void listMedicine(Medicine PM) {
         System.out.println("Lista de las medicinas");
