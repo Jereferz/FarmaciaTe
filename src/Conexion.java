@@ -6,7 +6,7 @@ public class Conexion {
     private static Connection conn;
     private static Conexion instancia;
 
-    private static final String url = "jdbc:mysql://localhost:3306/farmacia";
+    private static final String url = "jdbc:mysql://localhost:8081/farmacia";
     private static final String user = "root";
     private static final String pass = "";
 
@@ -16,7 +16,7 @@ public class Conexion {
             System.out.println("Conexion Exitosa :D");
             return conn;
         } catch (Exception e){
-            System.out.println("Falla conetion :c");
+            System.out.println("Falla conetion :cC");
         }
         return conn;
     }
@@ -25,10 +25,7 @@ public class Conexion {
             System.out.println("Conex close ");
             conn.close();
         } catch (Exception e) {
-            System.out.println("Conex Close ");
-            conn.close();
-        } finally {
-            conn.close();
+
         }
     }
     public static Conexion getInstancia(){

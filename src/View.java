@@ -16,9 +16,9 @@ public class View {
         try {
             int leer = 0;
             System.out.println("Farmacaco S.A");
-            System.out.println("1. Agregar Proveedor");
-            System.out.println("2. Agregar Medicamento");
-            System.out.println("3. Mostrar inventario");
+            System.out.println("1. Agregar Medicamento");
+            System.out.println("2. Agregar Proveedor");
+            System.out.println("3. Mostrar Inventario");
             System.out.println("4. Mostrar Proveedores");
             System.out.println("5. Cambiar Precio de Medicamento");
             System.out.println("6. Salir");
@@ -43,7 +43,6 @@ public class View {
     }
     public static Medicine addingMedicine() {
         int code;
-        int state = 0;
         String name;
         int amount;
         double unit_price;

@@ -95,6 +95,7 @@ import java.util.Scanner;
                 QueryInsert.setString(3, m.getName());
                 QueryInsert.setInt(4, m.getAmount());
                 QueryInsert.setDouble(5, m.getUnitPrice());
+                QueryInsert.setInt(6, m.getState());
                 int medicineInsert = QueryInsert.executeUpdate();
                 exit = true;
             } catch (SQLException ex) {
@@ -115,7 +116,6 @@ import java.util.Scanner;
                     medicina.setName(rs.getString(3));
                     medicina.setAmount(rs.getInt(4));
                     medicina.setUnitPrice(rs.getInt(5));
-                    Medicine.setState(rs.getInt(6));
                     result.add(medicina);
                 }
             } catch (SQLException e) {

@@ -7,7 +7,7 @@ public class Singleton {
 
     public static Connection getInstance() throws SQLException {
         if (connection == null) {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/farmacia", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:8081/farmacia", "root", "");
         }
         return connection;
     }
