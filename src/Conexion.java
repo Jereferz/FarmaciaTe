@@ -8,7 +8,7 @@ public class Conexion {
 
     private static final String url = "jdbc:mysql://localhost:80/farmacia";
     private static final String user = "root";
-    private static final String pass = "";
+    private static final String pass = "123456";
 
     public Connection conectar () throws SQLException {
         try {

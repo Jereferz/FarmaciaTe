@@ -5,13 +5,13 @@ import java.util.List;
 
 
 public class Main {
-
         public static void main(String[] args) {
             //DataModelo model = new DataModelo();
+
             boolean bandera = true;
             do {
                 try {
-                    //Connection conn = Conexion.getInstancia().conectar();
+                    Connection conn = Conexion.getInstancia().conectar();
                     int opc = View.menu();
                     try {
                         Medicine med = null;
