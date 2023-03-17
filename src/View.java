@@ -60,29 +60,15 @@ public class View {
         m.setState(1);
         return m;
     }
-    /*public static void listMedicine(Medicine PM) {
-        System.out.println("Lista de las medicinas");
-        System.out.println(PM);
-    }*/
-    public static void listMedicine(List<Medicine> al) {
-        for (int i = 0; i < al.size(); i++) {
-            System.out.println(i + "-" + al.get(i));
+    public static void listProvider(List<Provider> pro) {
+        for (int i = 0; i < pro.size(); i++) {
+            System.out.println(i + "-" + pro.get(i));
         }
     }
-
-    public void listProvider(ResultSet prove) throws SQLException {
-        int cont = 0;
-        while(prove.next()) {
-            ++cont;
-            PrintStream a1 = System.out;
-            int a = prove.getInt(1);
-            a1.println("" + a + "Proveedor: " + prove.getString(2));
+    public static void listMedicine(List<Medicine> med) {
+        for (int i = 0; i < med.size(); i++) {
+            System.out.println(i + "-" + med.get(i));
         }
-    }
-
-    public static void listProvider(Provider PM) {
-        System.out.println("Lista de Proveedores");
-        System.out.println(PM);
     }
 }
 
